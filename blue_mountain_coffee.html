@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blue Mountain Coffee Roasters — Cumming, GA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300;1,9..144,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ── TOKENS — softened palette ── */
+:root {
+  --espresso:   #2C1A0E;   /* was #1A0C05 — warmer, less harsh */
+  --roast:      #3D2210;   /* was #2E1608 */
+  --amber:      #B86920;   /* was #C4762A — more muted/earthy */
+  --amber-lt:   #D4935A;   /* was #E8A95A — less orange */
+  --amber-pale: #F0DCC8;   /* new — soft warm accent */
+  --oat:        #F7F2EA;   /* was #F5EFE4 — slightly softer */
+  --oat-warm:   #EEE5D4;   /* was #EDE3D0 */
+  --oat-mid:    #DDD0BC;   /* was #D9CCBA */
+  --oat-deep:   #C9B99E;   /* new */
+  --sage:       #637A55;   /* was #5A7052 — slightly more muted */
+  --sage-pale:  #EDF1E8;
+  --ink:        #251408;   /* was #180B03 — warmer black */
+  --mid:        #6B5440;   /* was #5C4A38 */
+  --muted:      #9B866E;   /* was #8C7860 */
+  --white:      #FEFBF6;   /* was #FDFAF6 */
+
+  /* SVG grain texture — subtle noise overlay */
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  --grain-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.055'/%3E%3C/svg%3E");
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--white);color:var(--ink);line-height:1.6;
+}
+
+/* Paper grain on body — very subtle overall texture */
+body::before{
+  content:'';
+  position:fixed;inset:0;
+  pointer-events:none;z-index:9999;
+  background-image:var(--grain);
+  background-repeat:repeat;
+  background-size:300px 300px;
+  mix-blend-mode:multiply;
+  opacity:.6;
+}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  background:rgba(254,251,246,.97);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--oat-mid);
+  height:60px;padding:0 3rem;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.nav-logo{
+  font-family:'Fraunces',serif;font-size:1.15rem;font-weight:600;
+  color:var(--espresso);text-decoration:none;letter-spacing:-.01em;
+}
+.nav-logo span{color:var(--amber)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{
+  font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--mid);text-decoration:none;font-weight:500;transition:color .2s;
+}
+.nav-links a:hover{color:var(--amber)}
+.nav-cta{
+  background:var(--espresso)!important;color:var(--oat)!important;
+  padding:.4rem 1.1rem;border-radius:2px;
+}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;padding-top:60px;
+  display:grid;grid-template-columns:55% 45%;
+  position:relative;overflow:hidden;
+}
+
+/* Warm dark hero — with a subtle paper grain overlay */
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:
+    var(--grain-dark),
+    linear-gradient(145deg, #3A2010 0%, #2C1A0E 60%, #241408 100%);
+  z-index:0;
+}
+
+.hero-text{
+  padding:5rem 4rem 5rem 5rem;
+  display:flex;flex-direction:column;justify-content:center;
+  position:relative;z-index:1;
+}
+.hero-text::after{
+  content:'';position:absolute;top:0;right:0;bottom:0;
+  width:1px;background:rgba(184,105,32,.18);
+}
+.hero-eyebrow{
+  font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;
+  color:var(--amber-lt);margin-bottom:1.25rem;font-weight:500;
+}
+.hero-title{
+  font-family:'Fraunces',serif;
+  font-size:clamp(3rem,5vw,4.2rem);
+  font-weight:300;line-height:1.08;
+  color:var(--oat);letter-spacing:-.02em;
+}
+.hero-title em{font-style:italic;color:var(--amber-lt)}
+.hero-body{
+  font-size:.92rem;color:rgba(238,229,212,.6);
+  line-height:1.8;max-width:380px;
+  margin:1.5rem 0 2.25rem;font-weight:300;
+}
+.hero-pills{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2.5rem}
+.pill{
+  background:rgba(184,105,32,.12);border:1px solid rgba(184,105,32,.25);
+  color:var(--amber-lt);font-size:.68rem;letter-spacing:.1em;
+  padding:.3rem .75rem;border-radius:20px;text-transform:uppercase;
+}
+.hero-btns{display:flex;gap:.75rem;flex-wrap:wrap}
+.btn-primary{
+  background:var(--amber);color:var(--white);
+  padding:.75rem 1.75rem;font-size:.75rem;
+  letter-spacing:.12em;text-transform:uppercase;
+  text-decoration:none;font-weight:500;border-radius:2px;
+  display:inline-block;transition:background .2s,transform .15s;
+}
+.btn-primary:hover{background:#a05818;transform:translateY(-1px)}
+.btn-ghost{
+  border:1px solid rgba(184,105,32,.35);color:var(--oat-warm);
+  padding:.75rem 1.75rem;font-size:.75rem;letter-spacing:.12em;
+  text-transform:uppercase;text-decoration:none;font-weight:500;
+  border-radius:2px;display:inline-block;transition:all .2s;
+}
+.btn-ghost:hover{border-color:var(--amber);color:var(--amber-lt)}
+
+/* ── COFFEE CUP ILLUSTRATION ── */
+.hero-visual{
+  display:flex;align-items:center;justify-content:center;
+  padding:3rem;position:relative;z-index:1;
+}
+.cup-scene{position:relative;width:280px;height:360px}
+
+.steam{
+  position:absolute;top:0;left:50%;transform:translateX(-50%);
+  display:flex;gap:18px;
+}
+.steam-line{
+  width:3px;border-radius:3px;
+  background:linear-gradient(to top,rgba(238,229,212,.45),transparent);
+  animation:steamRise 2.8s ease-in-out infinite;
+}
+.steam-line:nth-child(1){height:48px;animation-delay:0s}
+.steam-line:nth-child(2){height:60px;animation-delay:.5s}
+.steam-line:nth-child(3){height:44px;animation-delay:1s}
+@keyframes steamRise{
+  0%{transform:translateY(0) scaleX(1);opacity:.65}
+  50%{transform:translateY(-14px) scaleX(1.4);opacity:.3}
+  100%{transform:translateY(-28px) scaleX(.7);opacity:0}
+}
+.cup-body{
+  position:absolute;top:68px;left:50%;transform:translateX(-50%);
+  width:160px;height:140px;
+  background:linear-gradient(160deg,#4A2810 0%,#2C1A0E 100%);
+  border-radius:4px 4px 24px 24px;
+  border:1.5px solid rgba(184,105,32,.3);
+  overflow:hidden;
+}
+.cup-body::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:36px;
+  background:rgba(184,105,32,.1);
+  border-bottom:1px solid rgba(184,105,32,.18);
+}
+.cup-surface{
+  position:absolute;top:4px;left:4px;right:4px;height:28px;
+  background:radial-gradient(ellipse at 40% 40%,#B8692080 0%,#7A3E0E 50%,#3A1E0A 100%);
+  border-radius:2px;
+}
+.cup-surface::after{
+  content:'';position:absolute;
+  top:6px;left:50%;transform:translateX(-50%);
+  width:36px;height:12px;
+  background:rgba(228,190,145,.25);
+  border-radius:50%;
+}
+.cup-handle{
+  position:absolute;top:68px;right:-1px;
+  width:32px;height:52px;
+  border:1.5px solid rgba(184,105,32,.35);
+  border-left:none;
+  border-radius:0 16px 16px 0;
+}
+.cup-saucer{
+  position:absolute;top:200px;left:50%;transform:translateX(-50%);
+  width:200px;height:14px;
+  background:linear-gradient(to bottom,#3D2210,#2C1A0E);
+  border-radius:50%;
+  border:1px solid rgba(184,105,32,.2);
+}
+.cup-saucer::after{
+  content:'';position:absolute;
+  top:2px;left:20px;right:20px;height:3px;
+  background:rgba(184,105,32,.12);
+  border-radius:50%;
+}
+.bean{
+  position:absolute;width:18px;height:11px;
+  background:#3D2210;border-radius:50%;
+  border:1px solid rgba(184,105,32,.25);
+}
+.bean::after{
+  content:'';position:absolute;
+  top:4px;left:2px;right:2px;height:2px;
+  background:rgba(184,105,32,.2);border-radius:1px;
+}
+.bean-1{top:230px;left:28px;transform:rotate(-20deg)}
+.bean-2{top:245px;right:30px;transform:rotate(15deg)}
+.bean-3{top:265px;left:55px;transform:rotate(5deg)}
+.bean-4{top:255px;right:55px;transform:rotate(-30deg)}
+.bean-5{top:220px;left:60px;transform:rotate(40deg);opacity:.5}
+.menu-float{
+  position:absolute;
+  background:rgba(254,251,246,.06);
+  backdrop-filter:blur(6px);
+  border:1px solid rgba(184,105,32,.18);
+  border-radius:3px;padding:.4rem .8rem;
+  font-size:.68rem;letter-spacing:.08em;
+  color:var(--amber-lt);text-transform:uppercase;white-space:nowrap;
+}
+.mf1{top:40px;left:-20px}
+.mf2{top:100px;right:-30px}
+.mf3{bottom:60px;left:-10px}
+
+/* ── STRIP ── */
+/* Softer amber strip — more muted honey tone */
+.strip{
+  background:linear-gradient(to right, #A05818, #B8692A, #A86022);
+  padding:.8rem 5rem;
+  display:flex;justify-content:space-around;align-items:center;
+  flex-wrap:wrap;gap:.75rem;
+  position:relative;
+}
+.strip::before{
+  content:'';position:absolute;inset:0;
+  background-image:var(--grain-dark);
+  background-size:300px 300px;pointer-events:none;
+  mix-blend-mode:overlay;opacity:.4;
+}
+.strip-item{display:flex;align-items:center;gap:.6rem;position:relative}
+.strip-item strong{
+  font-family:'Fraunces',serif;font-size:1.1rem;
+  font-weight:400;color:rgba(255,248,238,.95);
+}
+.strip-item span{
+  font-size:.67rem;letter-spacing:.12em;
+  text-transform:uppercase;color:rgba(255,248,238,.6);
+}
+
+/* ── SHARED ── */
+.sec{padding:4rem 5rem}
+.sec-inner{max-width:1080px;margin:0 auto}
+.eyebrow{
+  font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--amber);font-weight:500;display:block;margin-bottom:.4rem;
+}
+.sec-title{
+  font-family:'Fraunces',serif;
+  font-size:clamp(1.7rem,2.8vw,2.4rem);
+  font-weight:400;line-height:1.2;color:var(--ink);
+}
+.sec-sub{
+  font-size:.9rem;color:var(--muted);font-weight:300;line-height:1.75;
+}
+
+/* ── MENU ── */
+/* Very light warm texture on white sections */
+.menu-sec{
+  background:var(--white);
+  position:relative;
+}
+.menu-sec::before{
+  content:'';position:absolute;inset:0;
+  background-image:var(--grain);
+  background-size:300px 300px;pointer-events:none;
+  opacity:.5;
+}
+.menu-layout{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:0;margin-top:2.5rem;position:relative;
+}
+.menu-col{border-top:1px solid var(--oat-mid)}
+.menu-col:first-child{border-right:1px solid var(--oat-mid);padding-right:2.5rem}
+.menu-col:last-child{padding-left:2.5rem}
+.menu-col-head{
+  font-family:'Fraunces',serif;font-size:.75rem;
+  letter-spacing:.18em;text-transform:uppercase;
+  color:var(--amber);padding:.75rem 0;
+  border-bottom:1.5px solid var(--amber);
+  display:block;
+}
+.menu-item{
+  display:grid;grid-template-columns:1fr auto;
+  gap:1rem;align-items:baseline;
+  padding:.8rem 0;border-bottom:1px solid var(--oat-mid);
+}
+.menu-item:last-child{border-bottom:none}
+.mi-name{
+  font-family:'Fraunces',serif;font-size:1rem;
+  font-weight:400;color:var(--ink);
+}
+.mi-note{font-size:.78rem;color:var(--muted);font-weight:300;margin-top:.1rem}
+.mi-tag{
+  font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--amber);white-space:nowrap;
+  padding:.15rem .5rem;border:1px solid rgba(184,105,32,.25);border-radius:2px;
+}
+
+/* ── ORIGINS — textured dark band ── */
+.origins{
+  position:relative;padding:4rem 5rem;
+  overflow:hidden;
+}
+/* Layered background: grain + warm dark gradient — not pure black */
+.origins::before{
+  content:'';position:absolute;inset:0;
+  background:
+    var(--grain-dark),
+    linear-gradient(150deg, #3D2210 0%, #2C1A0E 50%, #351A0C 100%);
+  z-index:0;
+}
+/* extra subtle halftone-ish dot texture */
+.origins::after{
+  content:'';position:absolute;inset:0;
+  background-image:radial-gradient(circle, rgba(184,105,32,.06) 1px, transparent 1px);
+  background-size:24px 24px;
+  pointer-events:none;z-index:0;
+}
+.origins-inner{max-width:1080px;margin:0 auto;position:relative;z-index:1}
+.origins-top{
+  display:grid;grid-template-columns:auto 1fr;
+  gap:4rem;align-items:center;
+  border-bottom:1px solid rgba(184,105,32,.12);
+  padding-bottom:2.5rem;margin-bottom:2.5rem;
+}
+.origins-headline{
+  font-family:'Fraunces',serif;
+  font-size:clamp(2.4rem,5vw,4rem);
+  font-weight:300;line-height:1.05;
+  color:var(--oat);letter-spacing:-.02em;
+}
+.origins-headline em{font-style:italic;color:var(--amber-lt)}
+.origins-desc{
+  font-size:.9rem;color:rgba(238,229,212,.55);
+  line-height:1.85;font-weight:300;
+  border-left:2px solid rgba(184,105,32,.25);
+  padding-left:1.5rem;
+}
+.beans-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+.bean-card{
+  padding:1.5rem;
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(184,105,32,.12);
+  border-radius:3px;position:relative;overflow:hidden;
+}
+/* warm top gradient accent on each card */
+.bean-card::before{
+  content:'';position:absolute;
+  top:0;left:0;right:0;height:2px;
+  opacity:.4;
+}
+.bean-card.jamaica::before{background:var(--amber)}
+.bean-card.ethiopia::before{background:var(--sage)}
+.bean-card.hawaii::before{background:var(--amber-lt)}
+.bean-number{
+  font-family:'Fraunces',serif;font-size:3rem;
+  font-weight:300;line-height:1;
+  color:rgba(184,105,32,.18);margin-bottom:.5rem;
+}
+.bean-name{
+  font-family:'Fraunces',serif;font-size:1.1rem;
+  font-weight:400;color:rgba(247,242,234,.9);margin-bottom:.25rem;
+}
+.bean-origin{
+  font-size:.63rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--amber);margin-bottom:.6rem;display:block;
+}
+.bean-desc{font-size:.8rem;color:rgba(238,229,212,.45);line-height:1.65;font-weight:300}
+
+/* ── VIBE ── */
+/* Warm parchment texture for the "oat" section */
+.vibe-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:0;
+}
+.vibe-visual{
+  position:relative;overflow:hidden;min-height:420px;
+  display:flex;align-items:center;justify-content:center;
+}
+/* textured warm dark — slightly lighter than hero */
+.vibe-visual::before{
+  content:'';position:absolute;inset:0;
+  background:
+    var(--grain-dark),
+    linear-gradient(160deg, #4A2A12 0%, #33190A 100%);
+  z-index:0;
+}
+.cafe-window{
+  width:200px;height:240px;
+  border:2.5px solid rgba(184,105,32,.35);
+  border-radius:4px 4px 2px 2px;
+  position:relative;overflow:hidden;
+  background:rgba(255,255,255,.025);
+  z-index:1;
+}
+.cafe-window::before{
+  content:'';position:absolute;
+  top:0;left:50%;transform:translateX(-50%);
+  width:2.5px;height:100%;background:rgba(184,105,32,.25);
+}
+.cafe-window::after{
+  content:'';position:absolute;
+  top:50%;left:0;right:0;height:2.5px;background:rgba(184,105,32,.25);
+}
+/* subtle warm glow in window panes */
+.cafe-window .pane{
+  position:absolute;
+  background:radial-gradient(ellipse at center,rgba(184,105,32,.08) 0%,transparent 70%);
+}
+.cafe-window .pane.tl{top:0;left:0;right:50%;bottom:50%}
+.cafe-window .pane.br{top:50%;left:50%;right:0;bottom:0}
+.window-label{
+  position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);
+  background:rgba(184,105,32,.85);
+  color:var(--white);font-size:.63rem;
+  letter-spacing:.15em;text-transform:uppercase;
+  padding:.3rem .8rem;border-radius:2px;white-space:nowrap;
+}
+.cafe-table{
+  position:absolute;bottom:0;left:50%;transform:translateX(-50%);
+  width:160px;height:10px;
+  background:rgba(184,105,32,.18);
+  border-radius:2px 2px 0 0;z-index:1;
+}
+.cafe-table::before{
+  content:'';position:absolute;
+  bottom:0;left:20px;width:8px;height:60px;
+  background:rgba(184,105,32,.12);transform:translateY(100%);
+}
+.cafe-table::after{
+  content:'';position:absolute;
+  bottom:0;right:20px;width:8px;height:60px;
+  background:rgba(184,105,32,.12);transform:translateY(100%);
+}
+.vibe-text{
+  padding:3.5rem;
+  display:flex;flex-direction:column;justify-content:center;
+  background:var(--oat);
+  /* subtle parchment pattern */
+  background-image:
+    var(--grain),
+    linear-gradient(to bottom right, #F7F2EA, #F2EBD8);
+  background-size:300px 300px, cover;
+}
+.vibe-text h3{
+  font-family:'Fraunces',serif;
+  font-size:clamp(1.6rem,2.5vw,2.1rem);
+  font-weight:400;color:var(--ink);line-height:1.2;margin-bottom:1rem;
+}
+.vibe-text p{
+  font-size:.88rem;color:var(--mid);
+  line-height:1.8;font-weight:300;margin-bottom:.75rem;
+}
+.vibe-chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+.chip{
+  background:var(--white);border:1px solid var(--oat-mid);
+  color:var(--mid);font-size:.7rem;
+  letter-spacing:.06em;padding:.3rem .75rem;border-radius:2px;
+}
+
+/* ── REVIEWS ── */
+.reviews{
+  padding:4rem 5rem;
+  /* very soft warm white with grain */
+  background-image:var(--grain), linear-gradient(to bottom, #FEFBF6, #F7F2EA);
+  background-size:300px 300px, cover;
+  position:relative;
+}
+.reviews-inner{max-width:1080px;margin:0 auto}
+.reviews-head{
+  display:flex;justify-content:space-between;
+  align-items:flex-end;margin-bottom:2rem;flex-wrap:wrap;gap:1rem;
+}
+.review-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+.review-card{
+  padding:1.5rem;
+  border-top:2px solid var(--amber-pale);
+  background:rgba(255,255,255,.7);
+  border:1px solid var(--oat-mid);
+  border-top:2px solid var(--amber);
+}
+.stars{color:var(--amber);font-size:.8rem;margin-bottom:.6rem}
+.review-text{
+  font-family:'Fraunces',serif;font-size:.95rem;
+  font-style:italic;color:var(--ink);line-height:1.7;margin-bottom:.75rem;
+}
+.review-who{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+
+/* ── VISIT ── */
+.visit{
+  position:relative;padding:0 5rem;overflow:hidden;
+}
+.visit::before{
+  content:'';position:absolute;inset:0;
+  background:
+    var(--grain-dark),
+    linear-gradient(150deg, #3A2010 0%, #2C1A0E 55%, #311C0D 100%);
+  z-index:0;
+}
+.visit-inner{
+  max-width:1080px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1fr 1fr;
+  gap:0;position:relative;z-index:1;
+}
+.visit-head{
+  grid-column:1/-1;padding:3rem 0 2rem;
+  border-bottom:1px solid rgba(184,105,32,.18);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.visit-head h2{
+  font-family:'Fraunces',serif;
+  font-size:clamp(1.8rem,3vw,2.5rem);
+  font-weight:300;color:var(--oat);
+}
+.visit-col{padding:2rem 2rem 2.5rem 0}
+.visit-col+.visit-col{
+  padding:2rem 2rem 2.5rem 2rem;
+  border-left:1px solid rgba(184,105,32,.12);
+}
+.v-label{
+  font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--amber);display:block;margin-bottom:.5rem;
+}
+.v-title{
+  font-family:'Fraunces',serif;font-size:1rem;
+  font-weight:400;color:rgba(247,242,234,.9);margin-bottom:.6rem;
+}
+.v-text{font-size:.84rem;color:rgba(238,229,212,.55);line-height:1.85;font-weight:300}
+.v-text a{color:rgba(238,229,212,.55);text-decoration:none;transition:color .2s}
+.v-text a:hover{color:var(--amber-lt)}
+.hr-row{
+  display:flex;justify-content:space-between;
+  font-size:.8rem;color:rgba(238,229,212,.5);
+  padding:.25rem 0;border-bottom:1px solid rgba(184,105,32,.08);
+}
+.hr-row:last-child{border:none}
+.hr-day{color:rgba(238,229,212,.28);font-size:.72rem}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--roast);padding:1.75rem 5rem;
+  display:flex;justify-content:space-between;
+  align-items:center;flex-wrap:wrap;gap:1rem;
+  position:relative;
+}
+footer::before{
+  content:'';position:absolute;inset:0;
+  background-image:var(--grain);background-size:300px 300px;
+  pointer-events:none;opacity:.4;
+}
+.f-logo{
+  font-family:'Fraunces',serif;font-size:1.1rem;
+  font-weight:600;color:var(--amber);position:relative;
+}
+.f-copy{font-size:.7rem;color:rgba(184,105,32,.4);text-align:center;position:relative}
+.f-links{display:flex;gap:1.5rem;position:relative}
+.f-links a{
+  font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(184,105,32,.45);text-decoration:none;transition:color .2s;
+}
+.f-links a:hover{color:var(--amber)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:880px){
+  .hero{grid-template-columns:1fr}
+  .hero-visual{display:none}
+  .hero-text{padding:4rem 2rem}
+  .sec,.reviews,.origins,.visit{padding:3rem 1.5rem}
+  .menu-layout{grid-template-columns:1fr}
+  .menu-col:first-child{border-right:none;padding-right:0;border-bottom:1px solid var(--oat-mid)}
+  .menu-col:last-child{padding-left:0;margin-top:1.5rem}
+  .beans-row{grid-template-columns:1fr}
+  .origins-top{grid-template-columns:1fr;gap:1.5rem}
+  .vibe-grid{grid-template-columns:1fr}
+  .vibe-visual{min-height:220px}
+  .review-strip{grid-template-columns:1fr}
+  .visit-inner{grid-template-columns:1fr}
+  .visit-col+.visit-col{border-left:none;border-top:1px solid rgba(184,105,32,.12);padding-left:0}
+  nav{padding:0 1.5rem}
+  .nav-links{display:none}
+  footer{padding:1.5rem;flex-direction:column;text-align:center}
+  .strip{padding:.75rem 1.5rem}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Blue Mountain <span>Coffee Roasters</span></a>
+  <ul class="nav-links">
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#origins">Our Coffee</a></li>
+    <li><a href="#vibe">The Cafe</a></li>
+    <li><a href="#visit">Visit</a></li>
+    <li><a href="tel:4707584193" class="nav-cta">Call</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-text">
+    <span class="hero-eyebrow">Cafe · Roastery · Bakery · Cumming, GA</span>
+    <h1 class="hero-title">
+      Specialty<br>coffee worth<br><em>seeking out.</em>
+    </h1>
+    <p class="hero-body">Specialty coffee roasted in-house and served fresh every day. Find us at the corner of Peachtree Pkwy and Sharon Road in Cumming.</p>
+    <div class="hero-pills">
+      <span class="pill">Open Daily 8AM–9PM</span>
+      <span class="pill">Free Wi-Fi</span>
+      <span class="pill">Dogs Welcome</span>
+      <span class="pill">Suwanee & Cumming</span>
+    </div>
+    <div class="hero-btns">
+      <a href="#menu" class="btn-primary">See the Menu</a>
+      <a href="#visit" class="btn-ghost">Find Us</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="cup-scene">
+      <!-- SVG coffee cup illustration -->
+      <svg viewBox="0 0 320 420" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:300px;filter:drop-shadow(0 12px 40px rgba(0,0,0,0.35))">
+        <defs>
+          <radialGradient id="coffeeGrad" cx="40%" cy="35%" r="65%">
+            <stop offset="0%" stop-color="#C4762A" stop-opacity="0.9"/>
+            <stop offset="45%" stop-color="#7A3E0E"/>
+            <stop offset="100%" stop-color="#3A1A06"/>
+          </radialGradient>
+          <radialGradient id="cupGrad" cx="30%" cy="20%" r="80%">
+            <stop offset="0%" stop-color="#5A2E10"/>
+            <stop offset="100%" stop-color="#2C1508"/>
+          </radialGradient>
+          <radialGradient id="saucerGrad" cx="50%" cy="30%" r="70%">
+            <stop offset="0%" stop-color="#4A2410"/>
+            <stop offset="100%" stop-color="#251008"/>
+          </radialGradient>
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="3" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+
+        <!-- steam lines -->
+        <g opacity="0.7">
+          <path d="M128 88 Q122 72 128 56 Q134 40 128 24" stroke="#D4935A" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.6">
+            <animate attributeName="opacity" values="0.6;0.2;0.6" dur="2.5s" repeatCount="indefinite"/>
+            <animate attributeName="d" values="M128 88 Q122 72 128 56 Q134 40 128 24;M128 88 Q136 70 128 52 Q120 38 128 20;M128 88 Q122 72 128 56 Q134 40 128 24" dur="2.5s" repeatCount="indefinite"/>
+          </path>
+          <path d="M160 82 Q153 64 160 46 Q167 28 160 12" stroke="#D4935A" stroke-width="3.5" fill="none" stroke-linecap="round" opacity="0.75">
+            <animate attributeName="opacity" values="0.75;0.25;0.75" dur="2.8s" begin="0.4s" repeatCount="indefinite"/>
+            <animate attributeName="d" values="M160 82 Q153 64 160 46 Q167 28 160 12;M160 82 Q168 62 160 44 Q152 26 160 8;M160 82 Q153 64 160 46 Q167 28 160 12" dur="2.8s" begin="0.4s" repeatCount="indefinite"/>
+          </path>
+          <path d="M192 88 Q198 70 192 54 Q186 38 192 22" stroke="#D4935A" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.55">
+            <animate attributeName="opacity" values="0.55;0.15;0.55" dur="3s" begin="0.9s" repeatCount="indefinite"/>
+            <animate attributeName="d" values="M192 88 Q198 70 192 54 Q186 38 192 22;M192 88 Q184 68 192 50 Q200 34 192 18;M192 88 Q198 70 192 54 Q186 38 192 22" dur="3s" begin="0.9s" repeatCount="indefinite"/>
+          </path>
+        </g>
+
+        <!-- saucer shadow -->
+        <ellipse cx="160" cy="348" rx="100" ry="10" fill="rgba(0,0,0,0.25)" filter="url(#glow)"/>
+
+        <!-- saucer -->
+        <ellipse cx="160" cy="338" rx="96" ry="14" fill="url(#saucerGrad)" stroke="rgba(196,118,42,0.3)" stroke-width="1.5"/>
+        <ellipse cx="160" cy="335" rx="72" ry="7" fill="rgba(255,255,255,0.04)"/>
+
+        <!-- cup body - tapered trapezoid -->
+        <path d="M96 148 L104 330 Q104 338 112 338 L208 338 Q216 338 216 330 L224 148 Z"
+              fill="url(#cupGrad)" stroke="rgba(196,118,42,0.25)" stroke-width="1.5"/>
+
+        <!-- cup inner rim highlight -->
+        <ellipse cx="160" cy="150" rx="64" ry="10" fill="rgba(255,255,255,0.06)"/>
+
+        <!-- coffee surface inside cup -->
+        <ellipse cx="160" cy="150" rx="62" ry="9" fill="url(#coffeeGrad)"/>
+
+        <!-- latte art on surface -->
+        <ellipse cx="152" cy="149" rx="22" ry="5" fill="rgba(232,190,140,0.22)" transform="rotate(-10,152,149)"/>
+        <path d="M148 147 Q160 143 172 147" stroke="rgba(232,190,140,0.18)" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+        <!-- cup handle -->
+        <path d="M224 178 Q262 178 262 218 Q262 258 224 258"
+              stroke="rgba(196,118,42,0.35)" stroke-width="12" fill="none"
+              stroke-linecap="round"/>
+        <path d="M224 178 Q255 178 255 218 Q255 258 224 258"
+              stroke="url(#cupGrad)" stroke-width="9" fill="none"
+              stroke-linecap="round"/>
+
+        <!-- cup rim top -->
+        <ellipse cx="160" cy="148" rx="64" ry="10" fill="none" stroke="rgba(196,118,42,0.3)" stroke-width="2"/>
+
+        <!-- subtle vertical highlight on cup -->
+        <path d="M112 165 Q110 248 112 318" stroke="rgba(255,255,255,0.05)" stroke-width="8" fill="none" stroke-linecap="round"/>
+
+        <!-- scattered beans -->
+        <g opacity="0.8">
+          <!-- bean 1 -->
+          <g transform="translate(68,298) rotate(-25)">
+            <ellipse cx="0" cy="0" rx="14" ry="8" fill="#3D2010" stroke="rgba(196,118,42,0.3)" stroke-width="1"/>
+            <line x1="-8" y1="0" x2="8" y2="0" stroke="rgba(196,118,42,0.25)" stroke-width="1.5" stroke-linecap="round"/>
+          </g>
+          <!-- bean 2 -->
+          <g transform="translate(245,310) rotate(18)">
+            <ellipse cx="0" cy="0" rx="14" ry="8" fill="#3D2010" stroke="rgba(196,118,42,0.3)" stroke-width="1"/>
+            <line x1="-8" y1="0" x2="8" y2="0" stroke="rgba(196,118,42,0.25)" stroke-width="1.5" stroke-linecap="round"/>
+          </g>
+          <!-- bean 3 -->
+          <g transform="translate(78,328) rotate(8)" opacity="0.65">
+            <ellipse cx="0" cy="0" rx="12" ry="7" fill="#3D2010" stroke="rgba(196,118,42,0.2)" stroke-width="1"/>
+            <line x1="-7" y1="0" x2="7" y2="0" stroke="rgba(196,118,42,0.2)" stroke-width="1.5" stroke-linecap="round"/>
+          </g>
+          <!-- bean 4 -->
+          <g transform="translate(238,330) rotate(-35)" opacity="0.7">
+            <ellipse cx="0" cy="0" rx="13" ry="7" fill="#3D2010" stroke="rgba(196,118,42,0.25)" stroke-width="1"/>
+            <line x1="-7" y1="0" x2="7" y2="0" stroke="rgba(196,118,42,0.2)" stroke-width="1.5" stroke-linecap="round"/>
+          </g>
+          <!-- bean 5 small -->
+          <g transform="translate(60,316) rotate(45)" opacity="0.45">
+            <ellipse cx="0" cy="0" rx="10" ry="6" fill="#3D2010" stroke="rgba(196,118,42,0.2)" stroke-width="1"/>
+            <line x1="-6" y1="0" x2="6" y2="0" stroke="rgba(196,118,42,0.18)" stroke-width="1" stroke-linecap="round"/>
+          </g>
+        </g>
+
+        <!-- floating label chips -->
+        <g font-family="DM Sans, sans-serif" font-size="10" letter-spacing="0.08em">
+          <!-- chip 1: top left -->
+          <rect x="18" y="108" width="102" height="24" rx="3" fill="rgba(253,250,246,0.07)" stroke="rgba(196,118,42,0.22)" stroke-width="1"/>
+          <text x="69" y="124" fill="#D4935A" text-anchor="middle" font-size="9.5" letter-spacing="0.09em">TIRAMISU LATTE</text>
+          <!-- chip 2: right -->
+          <rect x="210" y="170" width="108" height="24" rx="3" fill="rgba(253,250,246,0.07)" stroke="rgba(196,118,42,0.22)" stroke-width="1"/>
+          <text x="264" y="186" fill="#D4935A" text-anchor="middle" font-size="9.5" letter-spacing="0.09em">MATCHA LATTE</text>
+          <!-- chip 3: bottom left -->
+          <rect x="10" y="358" width="108" height="24" rx="3" fill="rgba(253,250,246,0.07)" stroke="rgba(196,118,42,0.22)" stroke-width="1"/>
+          <text x="64" y="374" fill="#D4935A" text-anchor="middle" font-size="9.5" letter-spacing="0.09em">EGG TART · PASTRY</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- STRIP -->
+<div class="strip">
+  <div class="strip-item"><strong>4.6 ★</strong><span>Google Rating</span></div>
+  <div class="strip-item"><strong>2 Locations</strong><span>Suwanee & Cumming</span></div>
+  <div class="strip-item"><strong>8AM – 9PM</strong><span>Open Every Day</span></div>
+  <div class="strip-item"><strong>Wi-Fi + Outlets</strong><span>Work & Study Friendly</span></div>
+  <div class="strip-item"><strong>Loyalty Card</strong><span>Punch per Visit</span></div>
+</div>
+
+<!-- MENU -->
+<section class="sec menu-sec" id="menu">
+  <div class="sec-inner">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:.25rem;flex-wrap:wrap;gap:1rem">
+      <div>
+        <span class="eyebrow">What We Serve</span>
+        <h2 class="sec-title">The Menu</h2>
+      </div>
+      <p class="sec-sub" style="max-width:380px;font-size:.84rem">A focused menu built around great coffee. Seasonal drinks come and go, so ask what's on the board when you stop in.</p>
+    </div>
+    <div class="menu-layout">
+      <div class="menu-col">
+        <span class="menu-col-head">Coffee & Espresso</span>
+        <div class="menu-item">
+          <div><div class="mi-name">Jamaica Blue Mountain</div><div class="mi-note">The namesake bean. Rich, smooth, and low-acid.</div></div>
+          <span class="mi-tag">Signature</span>
+        </div>
+        <div class="menu-item">
+          <div><div class="mi-name">Tiramisu Latte</div><div class="mi-note">Subtle coffee flavor with a light tiramisu finish. Not heavy, not overly sweet.</div></div>
+          <span class="mi-tag">Fan Fave</span>
+        </div>
+        <div class="menu-item">
+          <div><div class="mi-name">Ethiopia Yirgacheffe</div><div class="mi-note">Bright and fruity. A single-origin on espresso and pour-over rotation.</div></div>
+          <span class="mi-tag">Single Origin</span>
+        </div>
+        <div class="menu-item">
+          <div><div class="mi-name">Seasonal Specials</div><div class="mi-note">The board rotates. Ask your barista what's on today.</div></div>
+          <span class="mi-tag">Ask Us</span>
+        </div>
+      </div>
+      <div class="menu-col">
+        <span class="menu-col-head">Non-Coffee & Bakery</span>
+        <div class="menu-item">
+          <div><div class="mi-name">Ceremonial Matcha</div><div class="mi-note">Properly whisked and not overly sweet. Cookie butter flavoring available.</div></div>
+          <span class="mi-tag">Non-Coffee</span>
+        </div>
+        <div class="menu-item">
+          <div><div class="mi-name">Matcha Latte</div><div class="mi-note">A cleaner, lighter take. Great for people who want something different.</div></div>
+          <span class="mi-tag">Non-Coffee</span>
+        </div>
+        <div class="menu-item">
+          <div><div class="mi-name">Fresh Baked Pastries</div><div class="mi-note">Egg tarts, fruit tarts, and more. The display case changes, so see what looks good.</div></div>
+          <span class="mi-tag">Bakery</span>
+        </div>
+        <div class="menu-item">
+          <div><div class="mi-name">Seasonal Bakery Items</div><div class="mi-note">The pastry selection rotates with the season. Worth checking every visit.</div></div>
+          <span class="mi-tag">Bakery</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ORIGINS -->
+<section class="origins" id="origins">
+  <div class="origins-inner">
+    <div class="origins-top">
+      <h2 class="origins-headline">Good beans.<br><em>Roasted here.</em></h2>
+      <p class="origins-desc">The coffee here starts with where the bean comes from. Jamaica Blue Mountain and Ethiopia Yirgacheffe are both on the regular menu, and each one tastes different because they are different. Roasted in small batches in-house, so what you get in the cup is fresh.</p>
+    </div>
+    <div class="beans-row">
+      <div class="bean-card jamaica">
+        <div class="bean-number">01</div>
+        <div class="bean-name">Jamaica Blue Mountain</div>
+        <span class="bean-origin">Jamaica · Our Namesake</span>
+        <p class="bean-desc">Rich, smooth, and naturally low in acid. It's a rare bean and a genuinely good cup. The reason the cafe is named what it is.</p>
+      </div>
+      <div class="bean-card ethiopia">
+        <div class="bean-number">02</div>
+        <div class="bean-name">Ethiopia Yirgacheffe</div>
+        <span class="bean-origin">Ethiopia · Single Origin</span>
+        <p class="bean-desc">Bright, fruity, a little floral. A single-origin that tastes completely different from the Blue Mountain. On rotation on the espresso and pour-over bar.</p>
+      </div>
+      <div class="bean-card hawaii">
+        <div class="bean-number">03</div>
+        <div class="bean-name">Rotating Selections</div>
+        <span class="bean-origin">Seasonal · Ask the Bar</span>
+        <p class="bean-desc">The espresso and pour-over lineup rotates depending on what's fresh and in season. Ask at the bar what's currently on.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VIBE -->
+<section id="vibe" style="padding:0">
+  <div class="vibe-grid">
+    <div class="vibe-visual">
+      <div style="position:relative;z-index:1">
+        <div class="cafe-window">
+          <div class="pane tl"></div>
+          <div class="pane br"></div>
+          <div class="window-label">Open Daily 8AM – 9PM</div>
+        </div>
+        <div class="cafe-table"></div>
+      </div>
+    </div>
+    <div class="vibe-text">
+      <span class="eyebrow">The Cafe</span>
+      <h3>A place you'll<br><em style="font-family:'Fraunces',serif">want to stay in.</em></h3>
+      <p>Blue Mountain Coffee Roasters is family owned. Not a chain, not a franchise. The Cumming spot is the second location. The original in Suwanee has been at it for years and built a following that keeps coming back.</p>
+      <p>The space is bright, hand-painted, and genuinely comfortable. Good for working alone or sitting with someone. Power outlets, free Wi-Fi, and one of the only local cafes in the area that stays open into the evening.</p>
+      <div class="vibe-chips">
+        <span class="chip">Hand-Painted Interior</span>
+        <span class="chip">Free Wi-Fi</span>
+        <span class="chip">Power Outlets</span>
+        <span class="chip">Dog Friendly</span>
+        <span class="chip">Loyalty Punch Card</span>
+        <span class="chip">Open Late</span>
+        <span class="chip">Family Owned</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews" id="reviews">
+  <div class="reviews-inner">
+    <div class="reviews-head">
+      <div>
+        <span class="eyebrow">What People Are Saying</span>
+        <h2 class="sec-title">What people are saying</h2>
+      </div>
+      <a href="https://www.instagram.com/bluemtncoffeeroasters_cumming/" target="_blank" class="btn-primary" style="font-size:.7rem">Follow on Instagram</a>
+    </div>
+    <div class="review-strip">
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">"One of our favorite coffee shop visits in recent memory. The strawberry cloud latte and maple spice cinnamon matcha were both so delicious."</p>
+        <p class="review-who">— Yelp, January 2026</p>
+      </div>
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">"The ceremonial matcha with cookie butter was not only the perfect color but also not too sweet. Service was so sweet — this honestly made my Monday!"</p>
+        <p class="review-who">— Google Review</p>
+      </div>
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">"Just tried the new cafe in the neighborhood. Matcha was spot on and pastries were delicious — especially the fruit tart. Staff is friendly and atmosphere is very inviting."</p>
+        <p class="review-who">— Google Review</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VISIT -->
+<section class="visit" id="visit">
+  <div class="visit-inner">
+    <div class="visit-head">
+      <h2>Two locations, one roaster</h2>
+      <a href="https://maps.google.com/?q=1475+Peachtree+Pkwy+Suite+C1+Cumming+GA+30041" target="_blank" class="btn-primary" style="font-size:.7rem">Get Directions</a>
+    </div>
+    <div class="visit-col">
+      <span class="v-label">Cumming Location</span>
+      <div class="v-title">1475 Peachtree Pkwy, Suite C1</div>
+      <p class="v-text">Cumming, GA 30041<br><br>Corner of Sharon Rd & Peachtree Pkwy<br><br><a href="tel:4707584193">(470) 758-4193</a><br><br><a href="https://www.instagram.com/bluemtncoffeeroasters_cumming/" target="_blank">@bluemtncoffeeroasters_cumming</a></p>
+    </div>
+    <div class="visit-col">
+      <span class="v-label">Hours</span>
+      <div class="v-title">Open Every Day</div>
+      <div class="hr-row"><span class="hr-day">Mon</span><span>8:00 AM – 9:00 PM</span></div>
+      <div class="hr-row"><span class="hr-day">Tue</span><span>8:00 AM – 9:00 PM</span></div>
+      <div class="hr-row"><span class="hr-day">Wed</span><span>8:00 AM – 9:00 PM</span></div>
+      <div class="hr-row"><span class="hr-day">Thu</span><span>8:00 AM – 9:00 PM</span></div>
+      <div class="hr-row"><span class="hr-day">Fri</span><span>8:00 AM – 9:00 PM</span></div>
+      <div class="hr-row"><span class="hr-day">Sat</span><span>8:00 AM – 9:00 PM</span></div>
+      <div class="hr-row"><span class="hr-day">Sun</span><span>8:00 AM – 9:00 PM</span></div>
+    </div>
+    <div class="visit-col">
+      <span class="v-label">Suwanee Location</span>
+      <div class="v-title">2815 Lawrenceville-Suwanee Rd</div>
+      <p class="v-text">Suite 400, Suwanee, GA 30024<br><br><a href="tel:6782889486">(678) 288-9486</a><br><br><a href="https://www.instagram.com/bluemtncoffeeroasters/" target="_blank">@bluemtncoffeeroasters</a><br><br>The original location. Drive-thru available.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-logo">Blue Mountain Coffee Roasters</div>
+  <p class="f-copy">© 2026 Blue Mountain Coffee Roasters · Cumming & Suwanee, GA<br>
+  <span style="font-size:.6rem;opacity:.6">Website concept by SocialChirp · socialchirp.com</span></p>
+  <div class="f-links">
+    <a href="https://www.instagram.com/bluemtncoffeeroasters_cumming/" target="_blank">Instagram</a>
+    <a href="tel:4707584193">Call Cumming</a>
+    <a href="https://maps.google.com/?q=1475+Peachtree+Pkwy+Suite+C1+Cumming+GA+30041" target="_blank">Directions</a>
+  </div>
+</footer>
+
+</body>
+</html>
